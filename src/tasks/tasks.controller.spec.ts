@@ -45,6 +45,6 @@ describe('Tasks Controller', () => {
     };
     jest.spyOn(tasksService, 'createTask').mockImplementation(() => result);
 
-    expect(controller.createTask('new task', 'description 1')).toBe(result);
+    expect(controller.createTask({ title: 'new task', description: 'description 1'})).toBe(result);
   });
 });

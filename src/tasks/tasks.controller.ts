@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Logger } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from './task.model';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -8,7 +9,7 @@ export class TasksController {
     private readonly tasksService: TasksService,
     private readonly loggerService: Logger,
   ) {
-    loggerService.setContext(TasksController.name)
+    loggerService.setContext(TasksController.name);
   }
 
   @Get()
@@ -18,11 +19,8 @@ export class TasksController {
   }
 
   @Post()
-  createTask(
-    @Body('title') title: string,
-    @Body('description') description: string,
-  ): Task {
+  createTask(@Body() createTaskDto: CreateTaskDto): Task {
     this.loggerService.log('Call CreateTask');
-    return this.tasksService.createTask(title, description);
+    return this.tasksService.createTask(createTaskDto);
   }
 }

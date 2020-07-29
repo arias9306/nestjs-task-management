@@ -19,9 +19,9 @@ describe('TasksService', () => {
   });
 
   it('should retrieve 3 task', () => {
-    service.createTask('task 1', 'description 1');
-    service.createTask('task 2', 'description 2');
-    service.createTask('task 3', 'description 3');
+    service.createTask({title: 'task 1', description: 'description 1'});
+    service.createTask({title: 'task 2', description: 'description 2'});
+    service.createTask({title: 'task 3', description: 'description 3'});
 
     const tasks = service.getAllTasks();
 
@@ -30,7 +30,7 @@ describe('TasksService', () => {
   })
 
   it('should create a task', () => {
-    const newTask = service.createTask('task 1', 'description 1');
+    const newTask = service.createTask({title: 'task 1', description: 'description 1'});
 
     expect(newTask.title).toBe('task 1');
     expect(newTask.description).toBe('description 1');
