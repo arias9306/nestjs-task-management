@@ -6,7 +6,7 @@ import {
   Matches,
 } from 'class-validator';
 
-export class AuthCreadentialsDto {
+export class AuthCredentialsDto {
 
   @IsString()
   @MinLength(4)
