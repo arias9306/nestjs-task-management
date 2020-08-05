@@ -3,7 +3,6 @@ import { TaskStatus } from './task-status.enum';
 
 @Entity()
 export class Task extends BaseEntity {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -14,5 +13,5 @@ export class Task extends BaseEntity {
   description: string;
 
   @Column()
-  status: TaskStatus
+  status: TaskStatus;
 }

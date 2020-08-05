@@ -1,4 +1,17 @@
-import { Controller, Get, Post, Body, Logger, Param, Delete, Query, UsePipes, ValidationPipe, ParseIntPipe, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Logger,
+  Param,
+  Delete,
+  Query,
+  UsePipes,
+  ValidationPipe,
+  ParseIntPipe,
+  Patch,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/get-task-filter.dto';
@@ -16,7 +29,9 @@ export class TasksController {
   }
 
   @Get()
-  getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto): Promise<Task[]> {
+  getTasks(
+    @Query(ValidationPipe) filterDto: GetTaskFilterDto,
+  ): Promise<Task[]> {
     this.loggerService.log('Call GetAllTask');
     return this.tasksService.getTasks(filterDto);
   }
@@ -41,7 +56,10 @@ export class TasksController {
   }
 
   @Patch('/:id/status')
-  updateTasksStatus(@Param('id', ParseIntPipe) id: number, @Body('status', TaskStatusValidationPipe) status: TaskStatus): Promise<Task> {
+  updateTasksStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+  ): Promise<Task> {
     this.loggerService.log(`Call update task by id with id ${id}`);
     return this.tasksService.updateTaskStatus(id, status);
   }
