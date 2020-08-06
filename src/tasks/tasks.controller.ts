@@ -1,37 +1,36 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
+  Controller,
+  Delete,
+  Get,
   Logger,
   Param,
-  Delete,
-  Query,
-  UsePipes,
-  ValidationPipe,
   ParseIntPipe,
   Patch,
+  Post,
+  Query,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
-import { TasksService } from './tasks.service';
+import { AuthGuard } from '@nestjs/passport';
+
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTaskFilterDto } from './dto/get-task-filter.dto';
-import { Task } from './task.entity';
-import { TaskStatus } from './task-status.enum';
 import { TaskStatusValidationPipe } from './task-status-validation.pipe';
+import { TaskStatus } from './task-status.enum';
+import { Task } from './task.entity';
+import { TasksService } from './tasks.service';
 
 @Controller('tasks')
+@UseGuards(AuthGuard())
 export class TasksController {
-  constructor(
-    private readonly tasksService: TasksService,
-    private readonly loggerService: Logger,
-  ) {
+  constructor(private readonly tasksService: TasksService, private readonly loggerService: Logger) {
     loggerService.setContext(TasksController.name);
   }
 
   @Get()
-  getTasks(
-    @Query(ValidationPipe) filterDto: GetTaskFilterDto,
-  ): Promise<Task[]> {
+  getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto): Promise<Task[]> {
     this.loggerService.log('Call GetAllTask');
     return this.tasksService.getTasks(filterDto);
   }

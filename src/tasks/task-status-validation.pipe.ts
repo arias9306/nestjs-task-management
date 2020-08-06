@@ -3,11 +3,7 @@ import { TaskStatus } from './task-status.enum';
 
 @Injectable()
 export class TaskStatusValidationPipe implements PipeTransform {
-  readonly allowedStatus = [
-    TaskStatus.DONE,
-    TaskStatus.IN_PROGRESS,
-    TaskStatus.OPEN,
-  ];
+  readonly allowedStatus = [TaskStatus.DONE, TaskStatus.IN_PROGRESS, TaskStatus.OPEN];
 
   transform(value: string): any {
     value = value.toUpperCase();

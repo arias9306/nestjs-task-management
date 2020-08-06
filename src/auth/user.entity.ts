@@ -1,10 +1,4 @@
-import {
-  BaseEntity,
-  PrimaryGeneratedColumn,
-  Column,
-  Entity,
-  Unique,
-} from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Unique } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Entity()
