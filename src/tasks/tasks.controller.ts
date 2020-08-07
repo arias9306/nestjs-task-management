@@ -23,7 +23,9 @@ import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 import { User } from '../auth/user.entity';
 import { GetUser } from '../auth/get-user.decorator';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
+@ApiTags('tasks')
 @Controller('tasks')
 @UseGuards(AuthGuard())
 export class TasksController {
@@ -39,6 +41,7 @@ export class TasksController {
   }
 
   @Post()
+  @ApiResponse({ status: 201, description: 'The record has been successfully created.'})
   @UsePipes(ValidationPipe)
   createTask(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User): Promise<Task> {
     this.loggerService.log('Call CreateTask');
