@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import * as config from 'config';
 
 import { AppModule } from './app.module';
+import * as compression from 'compression';
+
 
 async function bootstrap() {
   const serverConfig = config.get('server');
@@ -10,6 +12,7 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api/v1');
+  app.use(compression({level:9}));
 
   if (process.env.NODE_ENV === 'develoment') {
     app.enableCors();
