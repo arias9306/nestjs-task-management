@@ -28,11 +28,12 @@ import { GetUser } from '../auth/get-user.decorator';
 @UseGuards(AuthGuard())
 export class TasksController {
   constructor(private readonly tasksService: TasksService, private readonly loggerService: Logger) {
-    loggerService.setContext(TasksController.name);
+    this.loggerService.setContext(TasksController.name);
   }
 
   @Get()
   getTasks(@Query(ValidationPipe) filterDto: GetTaskFilterDto, @GetUser() user: User): Promise<Task[]> {
+    this.loggerService.verbose(`User "${user.username}" retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
     this.loggerService.log('Call GetAllTask');
     return this.tasksService.getTasks(filterDto, user);
   }
