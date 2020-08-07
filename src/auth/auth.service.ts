@@ -11,7 +11,7 @@ export class AuthService {
     @InjectRepository(UserRepository)
     private readonly userRepository: UserRepository,
     private readonly jwtService: JwtService,
-    private readonly LoggerService: Logger
+    private readonly LoggerService: Logger,
   ) {}
 
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
@@ -27,7 +27,7 @@ export class AuthService {
 
     const payload: JwtPayload = { username };
     const accessToken = this.jwtService.sign(payload);
-    this.LoggerService.debug(`Generated JWT token with payload ${JSON.stringify(payload)}`)
+    this.LoggerService.debug(`Generated JWT token with payload ${JSON.stringify(payload)}`);
     return { accessToken };
   }
 }
