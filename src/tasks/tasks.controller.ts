@@ -41,7 +41,7 @@ export class TasksController {
   }
 
   @Post()
-  @ApiResponse({ status: 201, description: 'The record has been successfully created.'})
+  @ApiResponse({ status: 201, description: 'The record has been successfully created.' })
   @UsePipes(ValidationPipe)
   createTask(@Body() createTaskDto: CreateTaskDto, @GetUser() user: User): Promise<Task> {
     this.loggerService.log('Call CreateTask');

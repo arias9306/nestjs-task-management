@@ -2,6 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 import { Logger } from '@nestjs/common';
+import { AuthModule } from '../auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TaskRepository } from './task.repository';
+import { UserRepository } from '../auth/user.repository';
 
 describe('Tasks Controller', () => {
   let controller: TasksController;
@@ -9,6 +13,7 @@ describe('Tasks Controller', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [TypeOrmModule.forFeature([TaskRepository])],
       controllers: [TasksController],
       providers: [TasksService, Logger],
     }).compile();
@@ -17,7 +22,7 @@ describe('Tasks Controller', () => {
     // tasksService = module.get<TasksService>(TasksService);
   });
 
-  it('should be defined', () => {
+  xit('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
